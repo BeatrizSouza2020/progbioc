@@ -1,0 +1,41 @@
+#1
+refArquivo = open("\Users\LENOVO\Downloads\TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedCDSs.fasta")
+
+cabeçalho = ""
+sequência = ""
+
+for line in refArquivo.readline()[1:-1]:
+    if ">" in line:
+        gene = line.split(':')[0]
+        cabeçalho = gene.pop(0) 
+    else:
+        sequência += line.replace('\n',"")
+
+print(cabeçalho,'\t',sequência)
+
+refArquivo.close()
+
+#2
+
+refArquivo = open("\Users\LENOVO\Downloads\TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
+
+cabeçalho = []
+sequência = []
+
+for line in refArquivo.readlines():
+    if ">" in line:
+        if sequência != "":
+            cabeçalho= cabeçalho.append()
+            sequência= sequência.append()
+          cabeçalho = line.strip('\n')
+    else:
+        sequência += line.strip('\n')
+    return sequência
+    return cabeçalho
+    
+print(cabeçalho)
+print(sequência)
+refArquivo.close()
+
+#3
+Não consegui importar o csv; baixei os pacotes, mas não rodou
