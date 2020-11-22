@@ -1,0 +1,64 @@
+#fasta: cabeçalho com identificador; sequência quebrada ou contínua
+#multi-fasta: muitas sequências fasta
+#fastaQ: sequência + linha de comentários+linha de qualidades
+#GFF: arquivo de anotação; coordenadas de um determinado gene
+#GTF: padrão outro na notação de genes
+#BED: coordenadas; elemento + posição inicial + posição final
+#SAM: armazena dado de mapeamento
+#BAM: SAM comprimido
+
+#SAM E BAM são manipulados pelo SANTOOLS
+
+arquivo = open() #identifica e abre o arquivo
+fasta = arquivo.read() #vai ler só a primeira linha
+cabeçalho = fasta.split('\n')[0][1:] #vai separar o cabeçalho que começa com > e termina com \n; ou seja vai separar onde termina
+sequência = ''.join(fasta.split('\n')[1:]) #concatena todas as linhas com exceção do cabeçalho numa única string
+
+print ('Identificador: %s' %cabeçalho)
+print ('Sequência: %s' %sequência)
+
+arquivo.close()
+
+#outra forma de escrever o código acima:
+
+arquivo = open() #identifica e abre o arquivo
+cabeçalho = arquivo.readline()[1:-1]
+seq = ''
+
+for linha in arquivo:
+    seq+= linha.replace('\n','') #a cada \n (que pula linha), coloca-se um '', ou seja, as linhas vao ficar continuas.
+
+print ('Identificador: %s' %cabeçalho)
+print ('Sequência: %s' %sequência)
+
+arquivo.close()
+
+#escrevendo em formato tabular:
+
+entrada = open('nome.fasta') #identifica e abre o arquivo
+saída = open ('nome.out', 'w') #
+saída.write('header\tseq\n') #\t é caracter de tabulação e \n é para indicar que a proxima coisa que for escrita será na linha seguinte
+
+cabeçalho = arquivo.readline()[1:-1]
+seq = ''
+
+for linha in entrada:
+    seq+= linha.replace('\n','') #a cada \n (que pula linha), coloca-se um '', ou seja, as linhas vao ficar continuas.
+
+saída.write('%s\t%s' %(cabeçalho,seq)
+
+entrada.close()
+saída.close()
+
+#manipulação de arquivos separados por virgulas (csv)
+
+entrada = open('nome.csv')
+entrada.readline()
+
+for linha in entrada:
+    data = linha.split(',')
+    if data[3].upper().rstrip() == 'BIRD':
+        print('%s\t%s\t%s' %(data[0], data[1], data[2], data[3].rstrip()))
+
+entrada.close()
+

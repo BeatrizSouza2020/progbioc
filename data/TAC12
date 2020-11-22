@@ -1,0 +1,17 @@
+#2
+
+arquivo = open('D:\Graduação\Comp 2\\TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins (2).txt' , 'r')
+
+for linha in arquivo.readlines():
+        if '>' and 'gene' in linha:
+            cabeçalho = linha
+            cabeçalho = cabeçalho.replace('>','')
+            print(cabeçalho)
+        if '>' not in linha:
+            seq=''
+            seq+=linha.replace('\n','')
+            print(seq)
+
+arquivo.close()
+
+#não está imprimindo as strings numa única linha.
